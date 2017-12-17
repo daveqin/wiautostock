@@ -15,16 +15,14 @@ import time
 
 class Winauto(object):
    
-    def __init__(self):
+    def __init__(self,fileext,ver,password):
         self.k = PyKeyboard() #get pykeyboard        
-        self.software= u'Õ¯…œπ…∆±Ωª“◊œµÕ≥5.0'
+        self.software= u'ÁΩë‰∏äËÇ°Á•®‰∫§ÊòìÁ≥ªÁªü5.0'
         self.hWndChildList=0
-        fileext = u'C:\\Õ¨ª®À≥»Ìº˛\\Õ¨ª®À≥\\xiadan.exe'    
-        ver     = 'ver=1 "0711296a70d754486417e81e747c6d7a72c8e267d205855f3789557393017109896345c0fc9952107eadf3e65a87dbe90b74d87f23c775a3f4fafed32aaca87e"'
-        self.password = '192351'
-        #open sofware
-        
-        #self.appStart(fileext,ver)
+        fileext = fileext   
+        ver     = ver
+        self.password = password
+      
 		
         self.para_hld=win32gui.FindWindow(None,self.software) #get hld by app word
         
@@ -32,7 +30,7 @@ class Winauto(object):
         if self.para_hld<=0:
             self.appStart(fileext,ver)
         
-        time.sleep(2)
+        time.sleep(5)
         if self.para_hld>0:
             win32gui.SetForegroundWindow(self.para_hld)  #show window
             self.hWndChildList=self.demo_child_windows(self.para_hld) #get hld 
@@ -44,7 +42,7 @@ class Winauto(object):
         
     '''
     ldList:
-    'post:?°Ï|left, top, right, bottom 
+    'post:?¬ß|left, top, right, bottom 
     '''
 
     def GetHld(self,post):
@@ -70,15 +68,12 @@ class Winauto(object):
     def demo_child_windows(self,parent):  
       
         if not parent:  
-            return  
+            return   
         hWndChildList = []  
         win32gui.EnumChildWindows(parent, lambda hWnd, param: param.append(hWnd),  hWndChildList)  
        
         return hWndChildList  
-    ''''' 
-   
-    :return: 
-    '''  
+    
     
 	#get all hld attr
     def show_window_attr(self,hWnd):  
@@ -129,13 +124,13 @@ class Winauto(object):
         
         win32api.keybd_event(VK_CODE['F4'],0,0,0)  #
         distance = 54 #left_distance
-        balance      = u'◊ Ω”‡∂Ó'
+        balance      = u'ËµÑÈáë‰ΩôÈ¢ù'
         balance      =self.getSset(balance,distance)
-        othe_balance = u'ø…”√Ω∂Ó'
+        othe_balance = u'ÂèØÁî®ÈáëÈ¢ù'
         othe_balance =self.getSset(othe_balance,distance)
-        market_value = u'π…∆± –÷µ'
+        market_value = u'ËÇ°Á•®Â∏ÇÂÄº'
         market_value =self.getSset(market_value,distance)
-        propertys = u'◊‹ ◊  ≤˙'
+        propertys = u'ÊÄª ËµÑ ‰∫ß'
         propertys =self.getSset(propertys,distance)
 
         AssetList={'balance':balance['title'],'othe_balance':othe_balance['title'],'market_value':market_value['title'],'propertys':propertys['title']}
@@ -154,7 +149,7 @@ class Winauto(object):
     def appStart(self,fileext,ver):
             
         win32api.ShellExecute(0, 'open',fileext,ver,'',1)       
-        time.sleep(10)
+        time.sleep(5)
         self.k.type_string(self.password)
         win32api.keybd_event(VK_CODE['tab'],0,0,0) 
         win32api.keybd_event(VK_CODE['enter'],0,0,0)
@@ -211,8 +206,6 @@ class Winauto(object):
 #kk.closApp()
 #kk.SellS('600663','0','1000')
 
-    
-#kk = Winauto()
 
 def main_buy(stock,price,nun):
 
@@ -238,11 +231,6 @@ def main_SellS(stock,price,nun):
 	 kk.closApp()                      #close app
 	
 
-#main_SellS('000651','0','200')
-#kk.BuyS('600663','0','1000') 
-#kk.SellS('600663','0','1000')
-#alla=kk.getAllAsset()
-#print alla
 
 
       
