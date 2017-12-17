@@ -49,6 +49,7 @@ class App:
         self.checkb2.grid(row=2,column=2)        
         
         
+        
         self.button = Button(frame, text=u"启动", fg="red", command=self.start)  
         self.button.grid(row=3,column=0) #此处side为LEFT表示将其放置 到frame剩余空间的最左方 
         
