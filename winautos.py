@@ -1,7 +1,6 @@
 # -*- coding: gb2312 -*- 
 
-import sys
-reload(sys)
+
 
 from config import VK_CODE
 from comm import writTxt
@@ -17,7 +16,7 @@ class Winauto(object):
    
     def __init__(self,fileext,ver,password):
         self.k = PyKeyboard() #get pykeyboard        
-        self.software= u'ç½‘ä¸Šè‚¡ç¥¨äº¤æ˜“ç³»ç»Ÿ5.0'
+        self.software= u'ÍøÉÏ¹ÉÆ±½»Ò×ÏµÍ³5.0'
         self.hWndChildList=0
         fileext = fileext   
         ver     = ver
@@ -42,7 +41,7 @@ class Winauto(object):
         
     '''
     ldList:
-    'post:?Â§|left, top, right, bottom 
+    'post:?¡ì|left, top, right, bottom 
     '''
 
     def GetHld(self,post):
@@ -100,7 +99,7 @@ class Winauto(object):
          win32api.keybd_event(VK_CODE['tab'],0,0,0) #
          self.k.type_string(buy_nun)                #
          win32api.keybd_event(VK_CODE['enter'],0,0,0) #
-         win32api.keybd_event(VK_CODE['enter'],0,0,0) #
+         #win32api.keybd_event(VK_CODE['enter'],0,0,0) #
     
         
 	
@@ -124,13 +123,13 @@ class Winauto(object):
         
         win32api.keybd_event(VK_CODE['F4'],0,0,0)  #
         distance = 54 #left_distance
-        balance      = u'èµ„é‡‘ä½™é¢'
+        balance      = u'×Ê½ğÓà¶î'
         balance      =self.getSset(balance,distance)
-        othe_balance = u'å¯ç”¨é‡‘é¢'
+        othe_balance = u'¿ÉÓÃ½ğ¶î'
         othe_balance =self.getSset(othe_balance,distance)
-        market_value = u'è‚¡ç¥¨å¸‚å€¼'
+        market_value = u'¹ÉÆ±ÊĞÖµ'
         market_value =self.getSset(market_value,distance)
-        propertys = u'æ€» èµ„ äº§'
+        propertys = u'×Ü ×Ê ²ú'
         propertys =self.getSset(propertys,distance)
 
         AssetList={'balance':balance['title'],'othe_balance':othe_balance['title'],'market_value':market_value['title'],'propertys':propertys['title']}

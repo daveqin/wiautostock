@@ -14,7 +14,7 @@ Created on 2015-7-20
 @explain: 实现GET方法和POST方法请求 
 '''  
 from  BaseHTTPServer import HTTPServer,BaseHTTPRequestHandler  
-#from winautos import Winauto 
+from winautos import Winauto 
 import urllib  
 import os
 import time
@@ -22,15 +22,24 @@ import time
 class ServerHTTP(BaseHTTPRequestHandler):
     #买入股票操作
     def BuySock(self,stock,price,nun):
-        auto = Winauto()  #实例化
-        auto.BuyS(stock,'0',nun)  #执行操作
-       
+        #auto = Winauto()  #实例化
+        #auto.BuyS(stock,'0',nun)  #执行操作
+        sf=u'"D:\\Program Files\\同花顺软件\\同花顺\\xiadan.exe"'
+        ps='192351'
+        ver ='ver=1 "0711296a70d754483fcce2ba9c94b6e448457994449ba09ccf00ee086207cb8446b818429656b7501e7babec2ecf0328dc2fee4846e33d886d50f77a1b30dd84"'
+        #win32api.ShellExecute(0, 'open',sf,ver,'',1) 
+        kk = Winauto(sf,ver,ps) 
+        kk.BuyS(stock,price,nun)
+        time.sleep(60)
+        kk.closApp()
+	               
         print '买入股票'
     
     #卖出股票操作    
     def SellSock(self,stock,price,nun):
         #auto = Winauto()  #实例化
         #auto.SellS(stock,'0',nun)  #执行操作
+        
         
         print '卖出股票操作'
         
@@ -60,11 +69,10 @@ class ServerHTTP(BaseHTTPRequestHandler):
         
     def do_GET(self):  
         path = self.path  
-        
-        print path  
+          
         #拆分url(也可根据拆分的url获取Get提交才数据),可以将不同的path和参数加载不同的html页面，或调用不同的方法返回不同的数据，来实现简单的网站或接口  
         query = urllib.splitquery(path)  
-        print query  
+      
         self.send_response(200)  
         self.send_header("Content-type","text/html")  
         self.send_header("test","This is test!")  
@@ -127,6 +135,6 @@ def start_server(port):
       
 if __name__ == "__main__": 
     
-    start_server(890)  
+    start_server(914)  
   
     

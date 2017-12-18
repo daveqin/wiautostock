@@ -10,50 +10,50 @@ import threading
 
 class App:  
     def __init__(self, master):  
-        #æ„é€ å‡½æ•°é‡Œä¼ å…¥ä¸€ä¸ªçˆ¶ç»„ä»¶(master),åˆ›å»ºä¸€ä¸ªFrameç»„ä»¶å¹¶æ˜¾ç¤º  
+        #¹¹Ôìº¯ÊıÀï´«ÈëÒ»¸ö¸¸×é¼ş(master),´´½¨Ò»¸öFrame×é¼ş²¢ÏÔÊ¾  
         frame = Frame(master) 
         master.geometry('400x200')
         frame.pack()  
-        #åˆ›å»ºä¸¤ä¸ªbuttonï¼Œå¹¶ä½œä¸ºframeçš„ä¸€éƒ¨åˆ†  
-        self.urlpLabel= Label(frame,text=u"è½¯ä»¶ä½ç½®")
+        #´´½¨Á½¸öbutton£¬²¢×÷ÎªframeµÄÒ»²¿·Ö  
+        self.urlpLabel= Label(frame,text=u"Èí¼şÎ»ÖÃ")
         self.urlpLabel.grid(row=0,column=0)  
         sf_text = StringVar()        
         self.sf = Entry(frame, textvariable = sf_text)
-        sf_text.set(u"è¾“å…¥è½¯ä»¶ä½ç½®")
+        sf_text.set(u"ÊäÈëÈí¼şÎ»ÖÃ")
         self.sf.grid(row=0,column=1)
         ps_text = StringVar()  
         self.pstext = Entry(frame,textvariable = ps_text)
-        ps_text.set(u"è¾“å…¥å¯†ç ")
+        ps_text.set(u"ÊäÈëÃÜÂë")
         self.pstext.grid(row=0,column=2)
         
         
         
-        self.sftime = Label(frame,text=u"å¯åŠ¨æ—¶é—´")
+        self.sftime = Label(frame,text=u"Æô¶¯Ê±¼ä")
         self.sftime.grid(row=1,column=0)
         tt = StringVar() 
         self.sfttext= Entry(frame,textvariable = tt)
         tt.set(u"24:24")
         self.sfttext.grid(row=1,column=1)
         self.hobby1 = BooleanVar()  
-        self.checkb1 = Checkbutton(frame,text = u"å¯åŠ¨",variable = self.hobby1)  
+        self.checkb1 = Checkbutton(frame,text = u"Æô¶¯",variable = self.hobby1)  
         self.checkb1.grid(row=1,column=2)
         
-        self.httplab = Label(frame,text=u"æœåŠ¡å™¨å¯åŠ¨")
+        self.httplab = Label(frame,text=u"·şÎñÆ÷Æô¶¯")
         self.httplab.grid(row=2,column=0)
         htt = StringVar() 
         self.httpport= Entry(frame,textvariable = htt)
-        htt.set(u"æœåŠ¡å™¨ç«¯å£")
+        htt.set(u"·şÎñÆ÷¶Ë¿Ú")
         self.httpport.grid(row=2,column=1)
         self.hobby2 = BooleanVar()  
-        self.checkb2 = Checkbutton(frame,text = u"å¯åŠ¨",variable = self.hobby2)  
+        self.checkb2 = Checkbutton(frame,text = u"Æô¶¯",variable = self.hobby2)  
         self.checkb2.grid(row=2,column=2)        
         
         
         
-        self.button = Button(frame, text=u"å¯åŠ¨", fg="red", command=self.start)  
-        self.button.grid(row=3,column=0) #æ­¤å¤„sideä¸ºLEFTè¡¨ç¤ºå°†å…¶æ”¾ç½® åˆ°frameå‰©ä½™ç©ºé—´çš„æœ€å·¦æ–¹ 
+        self.button = Button(frame, text=u"Æô¶¯", fg="red", command=self.start)  
+        self.button.grid(row=3,column=0) #´Ë´¦sideÎªLEFT±íÊ¾½«Æä·ÅÖÃ µ½frameÊ£Óà¿Õ¼äµÄ×î×ó·½ 
         
-        self.hi_there = Button(frame, text=u"æµ‹è¯•", command=self.appStart)  
+        self.hi_there = Button(frame, text=u"²âÊÔ", command=self.appStart)  
         self.hi_there.grid(row=3,column=1)  
   
     def start(self):
