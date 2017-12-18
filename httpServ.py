@@ -14,7 +14,7 @@ Created on 2015-7-20
 @explain: 实现GET方法和POST方法请求 
 '''  
 from  BaseHTTPServer import HTTPServer,BaseHTTPRequestHandler  
-from winautos import Winauto 
+#from winautos import Winauto 
 import urllib  
 import os
 import time
@@ -127,6 +127,6 @@ def start_server(port):
       
 if __name__ == "__main__": 
     
-    start_server(889)  
+    start_server(890)  
   
     
