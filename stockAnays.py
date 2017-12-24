@@ -16,7 +16,7 @@ y = 5.5*100
 
 e = x/y
 
-print int(e)
+print(int(e))
 
 his_600848=ts.get_hist_data('601318',start='2017-06-01',end='2017-11-16') #get a stock histor
 
