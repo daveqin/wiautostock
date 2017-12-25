@@ -10,10 +10,26 @@ import numpy as np
 import tushare as ts
 import matplotlib.pyplot as plt
 
-import json
+from httpapi import *
 
 
-data=ts.get_hist_data('600848')
-data1=data[['open','high','close','low']]
 
-print data1.to_json(orient='split')
+
+
+#print data1.to_json(orient='split')
+
+def get_hist(stock):
+    
+    data=ts.get_hist_data(stock)
+    data1=data[['open','high','close','low']]
+    
+    return data1
+
+
+
+
+
+port = 5089
+httpd = make_server("0.0.0.0", port, application)
+print "serving http on port {0}...".format(str(port))
+httpd.serve_forever()
