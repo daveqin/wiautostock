@@ -38,12 +38,15 @@ class stockapi:
         data=[]
         for i in  range(len(self.hist_data['close'])):
             
-            data_ma       = [self.hist_data['close'][-(date-i):i+1]]
+            data_ma    = [self.hist_data['close'][-(date-i):i+1]]
             #print np.mean(x60)
             data.append(np.mean(data_ma))
         return data
-        
-        
+     #换手率   
+     def get_turnover(self):
+         data2       =self.hist_data[['turnover']]
+         
+         return data2
     #返回财务数据
     
     
