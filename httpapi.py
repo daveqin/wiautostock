@@ -3,7 +3,7 @@
 import json
 from urlparse import parse_qs
 from wsgiref.simple_server import make_server
-from stockapi import *
+from stockapi import stockapi
 
 
 
@@ -22,7 +22,7 @@ def application(environ, start_response):
     no = params.get('no', [''])[0]
     
     action = params.get('action', [''])[0]
-    stock = params.get('stock', [''])[0]
+  
     
     jsoncallback= params.get('jsoncallback', [''])[0]
     #print callbacks
@@ -30,21 +30,22 @@ def application(environ, start_response):
     if action=='get_hist':
          
           #print get_hist(stock)
-          dic=get_hist(stock)
-          
+          stock = params.get('stock', [''])[0]
+          st = stockapi(stock)
+          data =st.get_hist();
           #dic= {'callbacks': callbacks,'action':action}
-          return jsoncallback+"("+dic+")"
+          return jsoncallback+"("+data+")"
     
     # 组成一个数组，数组中只有一个字典
     dic = {'name': name, 'no': no,'action':action}
     
     #$_GET['jsoncallback'] . "(".json_encode($array_e).")";
-    print "xxx("+json.dumps(dic)+")"
+    #print "xxx("+json.dumps(dic)+")"
     return jsoncallback+"("+json.dumps(dic)+")"
 
 
 if __name__ == "__main__":
-   port = 6276
+   port = 6281
    httpd = make_server("0.0.0.0", port, application)
    print "serving http on port {0}...".format(str(port))
    httpd.serve_forever()

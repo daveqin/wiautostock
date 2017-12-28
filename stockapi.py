@@ -20,11 +20,11 @@ class stockapi:
     def __init__(self,stock ):
         self.stock     = stock
         self.hist_data = ts.get_hist_data(self.stock)
-        
+        self.hist_data = self.hist_data.sort_index()
     #返回历史数据
     def get_hist(self):
         
-        data1          =self.hist_data[['open','high','close','low']]
+        data1          =self.hist_data[['open','close','high','close']]
         
         return data1.to_json(orient='split')
     #返回成交量
@@ -43,10 +43,10 @@ class stockapi:
             data.append(np.mean(data_ma))
         return data
      #换手率   
-     def get_turnover(self):
+    def get_turnover(self):
          data2       =self.hist_data[['turnover']]
          
-         return data2
+         return data2.to_json(orient='split')
     #返回财务数据
     
     
@@ -55,6 +55,7 @@ class stockapi:
 
 
 #st = stockapi("002486")
+#print st.get_hist()
 #print st.getMax(5)
 #plt.plot(range(len(his_600848['ma20'])),his_600848['ma20'])
 
@@ -62,7 +63,7 @@ class stockapi:
 #t=ts.get_report_data(2015,3)
 #t.to_json('000875.json',orient='records')
 #t.r
-print pd.read_json('000875.json')
+#print pd.read_json('000875.json')
 #f = h5py.File('test_s.h5','r')
 #print f['data']
 
