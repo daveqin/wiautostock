@@ -44,6 +44,7 @@ class stockapi:
             #print np.mean(x60)
             data.append(np.mean(data_ma))
         return data
+    #获取收盘价
     def get_clos(self):
          
         data1      =self.hist_data[['close']]
