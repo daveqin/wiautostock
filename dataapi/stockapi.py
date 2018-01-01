@@ -77,7 +77,18 @@ class stockapi:
          data2       =self.hist_data[['turnover']]
          
          return data2.to_json(orient='split')
-    #返回财务数据
+     
+    #返回净利润
+    def get_net_profits(self):
+        
+        data     = pd.read_json('profit_data/20170103.json')
+        data     = data[data.code==int(self.stock)]
+        profitss =data['net_profits'].values
+        dates    =data['date'].values
+        
+        data = {'profitss':profitss.tolist(),'dates':dates.tolist()}
+        
+        return json.dumps(data)
     
     
     #获取行情数据
@@ -85,14 +96,54 @@ class stockapi:
         
         #data = ts.get_today_all()
         #data = data[['code','name','changepercent']]
-        data = pd.read_json('2017_12_30.json')
+        data = pd.read_json('20170103.json')
       
         return data.to_json(orient='split')
     
     
     
-t = stockapi('000002')
-print t.get_hist_k()        
+t = stockapi('600550')
+print t.get_net_profits()
+
+#盈利能力
+def all_proft():
+    year = [2014,2015,2016,2017]
+    m    = [1,2,3,4]
+    for y in year:
+        for n in m:
+            print str(y)+str(n)
+            data = ts.get_profit_data(y,n)
+            data['date'] = str(y)+str(n)
+            data.to_json('profit_data/'+str(y)+str(n)+'.json',orient='records')
+            
+        
+    
+    
+    #data = pd.concat([data1,data2],axis=0)
+    
+    return data
+    
+def to():
+    year = [2015,2016,2017]
+    m    = [1,2,3,4]
+    data1 = pd.read_json('profit_data/20141.json')
+    data2 = pd.read_json('profit_data/20142.json')
+    data3 = pd.read_json('profit_data/20143.json')
+    data4 = pd.read_json('profit_data/20144.json')
+    
+    data1=pd.concat([data1,data2],axis=0)
+    data1=pd.concat([data1,data3],axis=0)
+    data1=pd.concat([data1,data4],axis=0)
+    
+    for y in year:
+        for n in m:
+            if (str(y)!='2017')&(str(m)!='4'):
+                data0 =pd.read_json('profit_data/'+str(y)+str(n)+'.json')
+                data1=pd.concat([data1,data0],axis=0)
+    data1.to_json('profit_data/20170103.json',orient='records')        
+    print data1
+    
+
 #print data1.to_json(orient='split')
 
 
