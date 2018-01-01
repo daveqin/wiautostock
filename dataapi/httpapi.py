@@ -10,37 +10,49 @@ def get_params(params):
     
 
     stock       = params.get('stock', [''])[0]
+    
     action      = params.get('action', [''])[0]
     jsoncallback= params.get('jsoncallback', [''])[0]
     #生成字典
+   
     params_arr  = {'stock':stock,'action':action,'jsoncallback':jsoncallback}
     
     return params_arr
 #对请进行操作        
 def do_action(action,stock):
-    st  = stockapi(stock)
-    
+   
+    st    = stockapi(stock)
+    datas = ""
     #获取历史数据
     if action=='get_hist':
-       data =st.get_hist()
+       datas =st.get_hist()
        
+    #获取k线图与拆线图
+    if action=='get_hist_k':
+       #datas_k =st.get_clos()
+       datas =st.get_hist_k()
+      
     #获取成交量   
     if action=='get_nun':
-       data =st.get_nun() 
+       datas =st.get_nun() 
+       
        
     #获取收盘价格 
     if action=='get_close':
-       data =st.get_clos()
+       datas =st.get_clos()
+       
        
     #获取涨幅
     if action=='get_change':
-       data =st.get_change()
+       datas =st.get_change()
+       
        
      #获取行情数据   
     if action=='get_all':
-       data =st.get_all()
+       datas =st.get_all()
+       
     
-    return data
+    return datas
 
 # 定义函数，参数是函数的两个参数，都是python本身定义的，默认就行了。
 def application(environ, start_response):
@@ -50,14 +62,20 @@ def application(environ, start_response):
     # 获取当前get请求的所有数据，返回是string类型
     params     = parse_qs(environ['QUERY_STRING'])
     params_arr = get_params(params)
-    # 获取get中key为name的值
+    
     stock       = params_arr['stock']
     action      = params_arr['action']
     jsoncallback= params_arr['jsoncallback']
-
     data =do_action(action,stock)
     
+    
     return jsoncallback+"("+data+")"
+    #///////////////////////////////
+    
+ 
+    # 获取get中key为name的值
+    
+
 
     # 组成一个数组，数组中只有一个字典
     #dic = {'name': name, 'no': no,'action':action}
@@ -68,7 +86,7 @@ def application(environ, start_response):
 
 
 if __name__ == "__main__":
-   port = 6293
+   port = 6341
    httpd = make_server("0.0.0.0", port, application)
    print "serving http on port {0}...".format(str(port))
    httpd.serve_forever()

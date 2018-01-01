@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>ECharts</title>
+    
+    <!-- 引入 echarts.js -->
+    <script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+    <!-- 引入jquery.js -->
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+   
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    
+    <script type="text/javascript">
+		
+		
+		
+	
+        var myChart = echarts.init(document.getElementById('main'));
+		var xAxisData = [];
+		var data1 = [];
+		var data2 = [];
+		for (var i = 0; i < 100; i++) {
+			xAxisData.push('类目' + i);
+			data1.push((Math.sin(i / 5) * (i / 5 -10) + i / 6) * 5);
+			data2.push((Math.cos(i / 5) * (i / 5 -10) + i / 6) * 5);
+		}
+         // 显示标题，图例和空的坐标轴
+		 option = {
+					title: {
+						text: '柱状图动画延迟'
+					},
+					legend: {
+						data: ['bar', 'bar2'],
+						align: 'left'
+					},
+					toolbox: {
+						// y: 'bottom',
+						feature: {
+							magicType: {
+								type: ['stack', 'tiled']
+							},
+							dataView: {},
+							saveAsImage: {
+								pixelRatio: 2
+							}
+						}
+					},
+					tooltip: {},
+					xAxis: {
+						data: xAxisData,
+						silent: false,
+						splitLine: {
+							show: false
+						}
+					},
+					yAxis: {
+					},
+					series: [{
+						name: 'bar',
+						type: 'bar',
+						data: data1,
+						animationDelay: function (idx) {
+							return idx * 10;
+						}
+					}, {
+						name: 'bar2',
+						type: 'bar',
+						data: data2,
+						animationDelay: function (idx) {
+							return idx * 10 + 100;
+						}
+					}],
+					animationEasing: 'elasticOut',
+					animationDelayUpdate: function (idx) {
+						return idx * 5;
+					}
+				};
+         myChart.setOption(option);
+
+
+　　</script>
+    
+</body>
+</html>

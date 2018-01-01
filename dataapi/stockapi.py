@@ -22,19 +22,32 @@ class stockapi:
         self.stock     = stock
         self.hist_data = ts.get_hist_data(self.stock,start='2017-01-01')
         self.hist_data = self.hist_data.sort_index()
-        
+       
     #返回历史数据
     def get_hist(self):
         
-        data1          =self.hist_data[['open','close','high','close']]
+        data1=self.hist_data[['open','close','high','close']]
         
         return data1.to_json(orient='split')
+    #获取k线图与历史数据
+    def get_hist_k(self):
+        
+        data1      =self.hist_data[['open','close','high','close']]
+        inde       =list(data1.index)
+        datav      =data1.values
+        ma60       =list(np.nan_to_num(self.getMax(60)))
+        data       ={'index':inde,'data':datav.tolist(),'ma60':ma60}
+        
+        return json.dumps(data)
+        #print json.dumps(data)
+        
     #返回成交量
     def get_nun(self):
         
         nun      = self.hist_data[['volume']]
         nun      = nun.T
         return nun.to_json(orient='split')
+    
     #返回均线    
     def getMax(self,date):
         data=[]
@@ -44,6 +57,7 @@ class stockapi:
             #print np.mean(x60)
             data.append(np.mean(data_ma))
         return data
+    
     #获取收盘价
     def get_clos(self):
          
@@ -57,6 +71,7 @@ class stockapi:
          data2       =self.hist_data[['p_change']]
          data2      = data2.T
          return data2.to_json(orient='split')
+     
     #换手率   
     def get_turnover(self):
          data2       =self.hist_data[['turnover']]
@@ -76,8 +91,8 @@ class stockapi:
     
     
     
-#t = stockapi('000002')
-#print t.get_all()        
+t = stockapi('000002')
+print t.get_hist_k()        
 #print data1.to_json(orient='split')
 
 
