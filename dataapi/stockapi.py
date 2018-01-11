@@ -12,6 +12,8 @@ import tushare as ts
 import h5py  #导入工具包
 import matplotlib.pyplot as plt
 import json 
+import talib
+
 
 
 
@@ -102,8 +104,8 @@ class stockapi:
     
     
     
-t = stockapi('600550')
-print t.get_net_profits()
+#t = stockapi('600550')
+
 
 #盈利能力
 def all_proft():
@@ -111,7 +113,7 @@ def all_proft():
     m    = [1,2,3,4]
     for y in year:
         for n in m:
-            print str(y)+str(n)
+            print (str(y)+str(n))
             data = ts.get_profit_data(y,n)
             data['date'] = str(y)+str(n)
             data.to_json('profit_data/'+str(y)+str(n)+'.json',orient='records')
@@ -141,7 +143,7 @@ def to():
                 data0 =pd.read_json('profit_data/'+str(y)+str(n)+'.json')
                 data1=pd.concat([data1,data0],axis=0)
     data1.to_json('profit_data/20170103.json',orient='records')        
-    print data1
+    print (data1)
     
 
 #print data1.to_json(orient='split')

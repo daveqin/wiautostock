@@ -64,7 +64,7 @@ class App:
             self.startHtt()
         
     def say_hi(self):  
-        print "hi there, this is a class example!" 
+        print ("hi there, this is a class example!") 
         
     def startHtt(self):
         threads = []

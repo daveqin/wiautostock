@@ -4,7 +4,7 @@ import json
 from urlparse import parse_qs
 from wsgiref.simple_server import make_server
 from stockapi import stockapi
-
+import random
 #获取请的参数
 def get_params(params):
     
@@ -86,9 +86,9 @@ def application(environ, start_response):
 
 
 if __name__ == "__main__":
-   port = 6341
+   port = int(random.random()*1000)
    httpd = make_server("0.0.0.0", port, application)
-   print "serving http on port {0}...".format(str(port))
+   print ("serving http on port {0}...".format(str(port)))
    httpd.serve_forever()
  
 #print get_hist('002486')
