@@ -66,7 +66,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         param_dict = parse.parse_qs(parseResult.query) 
         action = param_dict['action'][0]
         stock  = param_dict['stock'][0]
-       
+        jsback = param_dict['jsoncallback'][0]
         data = self.do_action(action,stock)
         
        
@@ -76,7 +76,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type','ss')
         self.end_headers()
-        self.wfile.write(data.encode("utf-8"))
+        self.wfile.write(jsback.encode("utf-8")+'('.encode("utf-8")+data.encode("utf-8")+')'.encode("utf-8"))
         #self.send_error(404,'111111111111')
         
      

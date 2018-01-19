@@ -42,10 +42,10 @@
 							if(result){
 									for(var i=0;i<result.data.length;i++){   
 										d = result.data[i];
-										if (d[0]>0){
-											$("#table tbody").append('<tr id="cr"><td>'+d[2]+'</td><td>'+d[1]+'</td><td>'+d[0]+'%</td></tr>');
+										if (d[2]>0){
+											$("#table tbody").append('<tr id="cr"><td>'+d[0]+'</td><td>'+d[1]+'</td><td>'+d[2]+'%</td></tr>');
 										}else{
-											$("#table tbody").append('<tr><td>'+d[2]+'</td><td>'+d[1]+'</td><td>'+d[0]+'%</td></tr>');
+											$("#table tbody").append('<tr><td>'+d[0]+'</td><td>'+d[1]+'</td><td>'+d[2]+'%</td></tr>');
 										}
 										
 									  }

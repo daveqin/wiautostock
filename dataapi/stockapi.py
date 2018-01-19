@@ -13,7 +13,8 @@ import h5py  #导入工具包
 import matplotlib.pyplot as plt
 import json 
 import talib
-
+import datetime
+import os
 
 
 
@@ -95,17 +96,27 @@ class stockapi:
     
     #获取行情数据
     def get_all(self):
+        now      = datetime.datetime.now()
+        n        = now.strftime('%Y-%m-%d')
+        filename = 'nowdata/'+str(n)+'.json'
+        print(filename)
+        if(os.path.exists(filename)):
+            data = pd.read_json(filename)
+            data = data[['code','name','changepercent']]
+           
+        else:
+            data  = ts.get_today_all()
+            data.to_json(filename,orient='records')
+            
+       
         
-        #data = ts.get_today_all()
-        #data = data[['code','name','changepercent']]
-        data = pd.read_json('20170103.json')
       
         return data.to_json(orient='split')
     
     
     
 #t = stockapi('600550')
-
+#print(t.get_all())
 
 #盈利能力
 def all_proft():
